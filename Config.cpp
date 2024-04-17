@@ -228,17 +228,17 @@ int Config::parseConfigFile(const char * configfile)
 				  {
 					  string param=line;
 					  // trim leading whitespace
-					  string::size_type  pos = param.find_first_not_of(delims);
+  					  string::size_type  pos = param.find_first_not_of(delims);
 					  if (pos != string::npos) param.erase(0,pos );
 					  pos=param.find_first_of(delims);
 					  if (pos != string::npos) param.erase(pos);
-					  if (param == "client-cert-not-required")
+					  if (param == "verify-client-cert")
 					  {
-						  this->deletechars(&line);
-						  if (line == "client-cert-not-required")
-						  {
-							  this->clientcertnotrequired=true;
-						  }
+						this->deletechars(&line);
+						if (line == "verify-client-certoptional" || line == "verify-client-certnone")
+						{
+							this->clientcertnotrequired=true;
+						}
 					  }
 					  if (param == "username-as-common-name")
 					  {
